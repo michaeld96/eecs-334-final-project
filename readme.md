@@ -12,3 +12,5 @@ P3
 255
 18 255 63
 ```
+
+The next thing we have set up is the 3D vector class. The vector has an $x$, $y$, and $z$ component. We add some basic components to it like adding a vector to another vector, scalar multiplication, and division.
