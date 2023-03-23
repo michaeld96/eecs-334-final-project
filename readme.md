@@ -34,3 +34,7 @@ A ray tracer send rays throygh pixels and computes the color seen in the directi
 We also need a virutal view port to pas the scene rays. The viewport's aspect ratio should be the same as the rendered image. We will also set the distance between the project plane and the projection point to be one unit. This is focal length!
 
 The eye of the camera will be at the origin $(0, 0, 0)$. Y-axis goes up, and x-axis goes to the right, and into the screen is the negative z-axis.
+
+<img src = "grey-sphere.png">
+
+This is the first sphere rendered that is mat.
