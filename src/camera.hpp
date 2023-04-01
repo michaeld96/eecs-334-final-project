@@ -13,23 +13,26 @@ class camera
 
 
     public:
-    camera()
+    camera(point3 look_from, point3 look_at, vec3 v_up, double vertical_field_of_view, double aspect_ratio)
     {
-        // Camera
-        const auto aspect_ratio = 16.0 / 9.0;
-        auto viewport_height = 2.0;
-        auto viewport_width = aspect_ratio * viewport_height;
-        auto focal_length= 1.0;
+        auto theta = degrees_to_radians(vertical_field_of_view);
+        auto height = tan(theta / 2);
+        auto view_port_height = 2.0 * height;
+        auto view_port_width = aspect_ratio * view_port_height;
+        
+        auto w = unit_vector(look_from - look_at);
+        auto u = unit_vector(cross(v_up, w));
+        auto v = cross(w,u);
 
-        origin = point3(0, 0, 0.25);
-        horizontal = vec3(viewport_width, 0, 0);
-        vertical = vec3(0, viewport_height, 0);
-        lower_left_corner = origin - horizontal/2 - vertical/2 - vec3(0, 0, focal_length);
+        origin = look_from;
+        horizontal = view_port_width * u;
+        vertical = view_port_height * v;
+        lower_left_corner = origin - horizontal/2 - vertical/2 - w;
     }
 
-    ray get_ray(double u, double v) const
+    ray get_ray(double s, double t) const
     {
-        return ray(origin, lower_left_corner + u*horizontal + v*vertical - origin);
+        return ray(origin, lower_left_corner + s*horizontal + t*vertical - origin);
     }
 };
 
